@@ -16,7 +16,8 @@
 	$strDate 		= $_POST['date']??"";
 	$strStartDate 	= $_POST['startdate']??"";
 	$strEndDate 	= $_POST['enddate']??"";
-	$intPeriod		= $_POST['period']??"";
+	$intPeriod		= $_POST['period']??0;
+	$intCreator		= $_POST['creator']??0;
 	
 	$strQuery		= "SELECT articles.*, 
 						CONCAT(user_name, \" \", user_firstname) AS \"user_name\"
@@ -44,6 +45,12 @@
 		$strWhere	= " AND "; // un seul where possible => And
 	}		
 							
+	// Recherche par créateur
+	if ($intCreator > 0){
+		$strQuery	.= $strWhere." article_creator = ".$intCreator; // numérique pas de ''
+		$strWhere	= " AND "; // un seul where possible => And
+	}		
+	
 	$strQuery		.= " ORDER BY article_createdate DESC;";
 						
 						
@@ -61,8 +68,8 @@
 					<input id="keywords" type="text" name="keywords" value="<?php echo($strKeywords); ?>" />
 				</p>
 				<p>	
-					<input type="radio" name="period" checked value="0" onclick="changePeriod()" /> Par date exacte
-					<input type="radio" name="period" value="1" onclick="changePeriod()" /> Par période
+					<input type="radio" name="period" <?php if ($intPeriod == 0){ echo("checked"); } ?> value="0" onclick="changePeriod()" /> Par date exacte
+					<input type="radio" name="period" <?php echo(($intPeriod == 1)?"checked":""); ?> value="1" onclick="changePeriod()" /> Par période
 				</p>
 				<p id="uniquedate">
 					<label for="date">Date</label>
@@ -76,9 +83,10 @@
 				</p>
 				<p>
 					<label for="author">Auteur</label>
-					<select id="author">
-						<option>christel</option>
-						<option>test</option>
+					<select id="author" name="creator">
+						<option value="0" <?php echo(($intCreator == 0)?"selected":"");?> > -- </option>
+						<option value="1" <?php echo(($intCreator == 1)?"selected":"");?> >christel</option>
+						<option value="2" <?php echo(($intCreator == 2)?"selected":"");?> >test</option>
 					</select>
 				</p>
 				<p><input type="submit" value="Rechercher" /> <input type="reset" value="Réinitialiser" />
