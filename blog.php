@@ -10,7 +10,6 @@
 	
 	require_once("connexion.php");
 	
-	var_dump($_POST);
 	// Récupération des données du formulaire
 	$strKeywords 	= $_POST['keywords']??"";
 	$strDate 		= $_POST['date']??"";
@@ -52,11 +51,12 @@
 	}		
 	
 	$strQuery		.= " ORDER BY article_createdate DESC;";
-						
-						
-	var_dump($strQuery);
 	$arrArticles	= $db->query($strQuery)->fetchAll();
 	
+	// Recherche de la liste des utilisateurs
+	$strUserQuery	= "SELECT user_id, user_name, user_firstname
+						FROM users";
+	$arrUsers		= $db->query($strUserQuery)->fetchAll();
 ?>
 
 	<div class="row mb-2">
@@ -85,8 +85,12 @@
 					<label for="author">Auteur</label>
 					<select id="author" name="creator">
 						<option value="0" <?php echo(($intCreator == 0)?"selected":"");?> > -- </option>
-						<option value="1" <?php echo(($intCreator == 1)?"selected":"");?> >christel</option>
-						<option value="2" <?php echo(($intCreator == 2)?"selected":"");?> >test</option>
+						<?php foreach ($arrUsers as $arrDetUser) { ?>
+						<option value="<?php echo($arrDetUser['user_id']); ?>" 
+								<?php echo(($intCreator == $arrDetUser['user_id'])?"selected":"");?> >
+							<?php echo($arrDetUser['user_name']); ?> <?php echo($arrDetUser['user_firstname']); ?>
+						</option>
+						<?php }	?>
 					</select>
 				</p>
 				<p><input type="submit" value="Rechercher" /> <input type="reset" value="Réinitialiser" />
