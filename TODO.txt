@@ -1,0 +1,4 @@
+-> Utiliser le modèle sur la page blog dans la fonciton findAll
+-> Créer modèle utilisateurs
+-> Faire fonctionner la liste des créateurs dans select (findAll)
+-> Ajouter une méthode findAllCreator (users qui a créé un article)
