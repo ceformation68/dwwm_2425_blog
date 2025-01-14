@@ -7,21 +7,31 @@
 	$strPage	= "blog";
 	
 	include_once("header.php");
+	/*require_once("connexion.php");*/
 	
-	require_once("connexion.php");
-	
+	// inclure le fichier modèle
+	require("models/article_model.php");
+	// instancier
+	$objArticleModel	= new ArticleModel();
+
 	// Récupération des données du formulaire
-	$strKeywords 	= $_POST['keywords']??"";
-	$strDate 		= $_POST['date']??"";
-	$strStartDate 	= $_POST['startdate']??"";
-	$strEndDate 	= $_POST['enddate']??"";
-	$intPeriod		= $_POST['period']??0;
-	$intCreator		= $_POST['creator']??0;
+	$objArticleModel->strKeywords 	= $_POST['keywords']??"";
+	$objArticleModel->strDate 		= $_POST['date']??"";
+	$objArticleModel->strStartDate 	= $_POST['startdate']??"";
+	$objArticleModel->strEndDate 	= $_POST['enddate']??"";
+	$objArticleModel->intPeriod		= $_POST['period']??0;
+	$objArticleModel->intCreator	= $_POST['creator']??0;
+
+	// Utiliser
+	$arrArticles		= $objArticleModel->findAll();	
 	
-	$strQuery		= "SELECT articles.*, 
+	/*$strQuery		= "SELECT articles.*, 
 						CONCAT(user_name, \" \", user_firstname) AS \"user_name\"
 						FROM articles
 							INNER JOIN users ON article_creator = user_id";
+	
+	
+	
 	// Définition du mot clé de condition
 	$strWhere		= " WHERE ";
 	// Recherche par mots clés
@@ -52,11 +62,17 @@
 	
 	$strQuery		.= " ORDER BY article_createdate DESC;";
 	$arrArticles	= $db->query($strQuery)->fetchAll();
+	*/
 	
 	// Recherche de la liste des utilisateurs
-	$strUserQuery	= "SELECT user_id, user_name, user_firstname
-						FROM users";
-	$arrUsers		= $db->query($strUserQuery)->fetchAll();
+	// inclure le fichier modèle
+	require("models/user_model.php");
+	// instancier
+	$objUserModel	= new UserModel();
+	// Utiliser
+	$arrUsers		= $objUserModel->findAllCreator();
+	
+	
 ?>
 
 	<div class="row mb-2">
@@ -65,29 +81,29 @@
 				<legend>Rechercher des articles</legend>
 				<p>
 					<label for="keywords">Mots clés</label>
-					<input id="keywords" type="text" name="keywords" value="<?php echo($strKeywords); ?>" />
+					<input id="keywords" type="text" name="keywords" value="<?php echo($objArticleModel->strKeywords); ?>" />
 				</p>
 				<p>	
-					<input type="radio" name="period" <?php if ($intPeriod == 0){ echo("checked"); } ?> value="0" onclick="changePeriod()" /> Par date exacte
-					<input type="radio" name="period" <?php echo(($intPeriod == 1)?"checked":""); ?> value="1" onclick="changePeriod()" /> Par période
+					<input type="radio" name="period" <?php if ($objArticleModel->intPeriod == 0){ echo("checked"); } ?> value="0" onclick="changePeriod()" /> Par date exacte
+					<input type="radio" name="period" <?php echo(($objArticleModel->intPeriod == 1)?"checked":""); ?> value="1" onclick="changePeriod()" /> Par période
 				</p>
 				<p id="uniquedate">
 					<label for="date">Date</label>
-					<input id="date" type="date" name="date" value="<?php echo($strDate); ?>" />
+					<input id="date" type="date" name="date" value="<?php echo($objArticleModel->strDate); ?>" />
 				</p>
 				<p id="period">
 					<label for="startdate">Date de début</label>
-					<input id="startdate" type="date" name="startdate" value="<?php echo($strStartDate); ?>" />
+					<input id="startdate" type="date" name="startdate" value="<?php echo($objArticleModel->strStartDate); ?>" />
 					<label for="enddate">Date de fin</label>
-					<input id="enddate" type="date" name="enddate" value="<?php echo($strEndDate); ?>"/>
+					<input id="enddate" type="date" name="enddate" value="<?php echo($objArticleModel->strEndDate); ?>"/>
 				</p>
 				<p>
 					<label for="author">Auteur</label>
 					<select id="author" name="creator">
-						<option value="0" <?php echo(($intCreator == 0)?"selected":"");?> > -- </option>
+						<option value="0" <?php echo(($objArticleModel->intCreator == 0)?"selected":"");?> > -- </option>
 						<?php foreach ($arrUsers as $arrDetUser) { ?>
 						<option value="<?php echo($arrDetUser['user_id']); ?>" 
-								<?php echo(($intCreator == $arrDetUser['user_id'])?"selected":"");?> >
+								<?php echo(($objArticleModel->intCreator == $arrDetUser['user_id'])?"selected":"");?> >
 							<?php echo($arrDetUser['user_name']); ?> <?php echo($arrDetUser['user_firstname']); ?>
 						</option>
 						<?php }	?>

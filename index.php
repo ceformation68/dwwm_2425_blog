@@ -5,13 +5,13 @@
 
 	// Variables fonctionnelles
 	$strPage	= "index";
-
 	include_once("header.php");
 	
 	// inclure le fichier modèle
 	require("models/article_model.php");
 	// instancier
 	$objArticleModel	= new ArticleModel();
+	
 	// Utiliser
 	$arrArticles		= $objArticleModel->findAll(4);
 	
