@@ -8,7 +8,14 @@
 
 	include_once("header.php");
 	
-	require_once("connexion.php");
+	// inclure le fichier modèle
+	require("models/article_model.php");
+	// instancier
+	$objArticleModel	= new ArticleModel();
+	// Utiliser
+	$arrArticles		= $objArticleModel->findAll(4);
+	
+	/*require_once("connexion.php");
 
 	$strQuery		= "SELECT articles.*, CONCAT(user_name, \" \", user_firstname) 
 						AS \"user_name\"
@@ -16,7 +23,7 @@
 							INNER JOIN users ON article_creator = user_id
 						ORDER BY article_createdate DESC
 						LIMIT 4 OFFSET 0;";
-	$arrArticles	= $db->query($strQuery)->fetchAll();
+	$arrArticles	= $db->query($strQuery)->fetchAll();*/
 	
 	//var_dump($arrArticles);
 ?>
