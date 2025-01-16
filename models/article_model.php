@@ -32,7 +32,7 @@
 		*/
 		public function findAll(int $intNbLimit=0):array{
 			$strQuery		= "SELECT articles.*, CONCAT(user_name, \" \", user_firstname) 
-								AS \"user_name\"
+								AS \"article_creator\"
 								FROM articles
 									INNER JOIN users ON article_creator = user_id";
 			

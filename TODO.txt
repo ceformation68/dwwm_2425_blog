@@ -1,5 +1,2 @@
--> Faire entité user
--> L'utiliser dans le blog (formulaire de recherche)
-
 -> Créer lien "Lire la suite"
 -> Créer page article_detail.php et afficher l'article en fonction de l'id

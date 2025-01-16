@@ -3,30 +3,33 @@
 	* Classe d'un article
 	* @author Christel Ehrhart
 	*/
+	require_once("mother_entity.php");
 	
-	class Article {
-		private int $_id;
+	class Article extends MotherEntity{
 		private string $_title;
 		private string $_img;
 		private string $_content;
 		private string $_createdate;
 		private string $_creator;
 		
-		/**
-		* Récupération de l'id
-		* @return int l'identifiant
-		*/
-		public function getId(){
-			return strtoupper($this->_id);
-		}
-		/**
-		* Mise à jour de l'id
-		* @param int l'identifiant
-		*/
-		public function setId(int $intId){
-			$this->_id = $intId;
-		}
-
+		public function __construct(){
+			parent::__construct();
+			$this->_prefixe = 'article';
+		}		
+		/*public function hydrate($arrData){
+			foreach ($arrData as $key=>$value){
+				$strMethod = "set".ucfirst(str_replace('article_', '', $key));
+				$this->$strMethod($value);
+			}
+			
+			$this->setId($arrData['article_id']);
+			$this->setTitle($arrData['article_title']);
+			$this->setImg($arrData['article_img']);
+			$this->setContent($arrData['article_content']);
+			$this->setCreatedate($arrData['article_createdate']);
+			$this->setCreator($arrData['user_name']);
+		}*/
+		
 		/**
 		* Récupération du titre
 		* @return string titre

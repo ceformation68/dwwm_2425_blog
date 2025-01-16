@@ -14,6 +14,7 @@
 	require("models/user_model.php");
 	
 	require_once("entities/article_entity.php");
+	require_once("entities/user_entity.php");
 	
 	// instancier
 	$objArticleModel	= new ArticleModel();
@@ -74,7 +75,6 @@
 	// Utiliser
 	$arrUsers		= $objUserModel->findAllCreator();
 	
-	
 ?>
 
 	<div class="row mb-2">
@@ -103,10 +103,20 @@
 					<label for="author">Auteur</label>
 					<select id="author" name="creator">
 						<option value="0" <?php echo(($objArticleModel->intCreator == 0)?"selected":"");?> > -- </option>
-						<?php foreach ($arrUsers as $arrDetUser) { ?>
-						<option value="<?php echo($arrDetUser['user_id']); ?>" 
-								<?php echo(($objArticleModel->intCreator == $arrDetUser['user_id'])?"selected":"");?> >
-							<?php echo($arrDetUser['user_name']); ?> <?php echo($arrDetUser['user_firstname']); ?>
+						<?php foreach ($arrUsers as $arrDetUser) { 
+							// Instancier objet User
+							$objUser = new User();
+							$objUser->hydrate($arrDetUser);
+							// Remplir l'objet => set
+							/*$objUser->setId($arrDetUser['user_id']);
+							$objUser->setName($arrDetUser['user_name']);
+							$objUser->setFirstname($arrDetUser['user_firstname']);*/
+							
+						?>
+						
+						<option value="<?php echo($objUser->getId()); //=> Utiliser le getter ?>" 
+								<?php echo(($objArticleModel->intCreator == $objUser->getId())?"selected":"");?> >
+							<?php echo($objUser->getCreatorName()); ?> 
 						</option>
 						<?php }	?>
 					</select>
@@ -118,12 +128,8 @@
 	<?php
 		foreach($arrArticles as $arrDetArticle){
 			$objArticle = new Article(); // Article 'coquille vide' 
-			$objArticle->setId($arrDetArticle['article_id']);
-			$objArticle->setTitle($arrDetArticle['article_title']);
-			$objArticle->setImg($arrDetArticle['article_img']);
-			$objArticle->setContent($arrDetArticle['article_content']);
-			$objArticle->setCreatedate($arrDetArticle['article_createdate']);
-			$objArticle->setCreator($arrDetArticle['user_name']);
+			// hydrater l'objet
+			$objArticle->hydrate($arrDetArticle);			
 			include("article.php");
 		}
 	?>

@@ -3,26 +3,17 @@
 	* Classe d'un utilisateur
 	* @author Christel Ehrhart
 	*/
+	require_once("mother_entity.php");
 	
-	class User {
-		private int $_id;
+	class User extends MotherEntity{
+
 		private string $_name;
 		private string $_firstname;
 		
-		/**
-		* Récupération de l'id
-		* @return int l'identifiant
-		*/
-		public function getId(){
-			return $this->_id;
+		public function __construct(){
+			parent::__construct();
+			$this->_prefixe = 'user';
 		}
-		/**
-		* Mise à jour de l'id
-		* @param int l'identifiant
-		*/
-		public function setId(int $intId){
-			$this->_id = $intId;
-		}		
 		
 		/**
 		* Récupération du nom
