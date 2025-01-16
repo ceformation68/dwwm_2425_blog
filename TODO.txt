@@ -1,7 +1,3 @@
--> Faire l'entité des articles
--> Utiliser les objets dans article.php
--> Faire fonctionner index et blog
--> Afficher un résumé de l'article (100 caractère + "..." si la contenu > 100 caractères), en utilisant l'entité
 -> Faire entité user
 -> L'utiliser dans le blog (formulaire de recherche)
 

@@ -71,6 +71,20 @@
 		public function setContent(string $strContent){
 			$this->_content = $strContent;
 		}
+		
+		public function getContentResume(int $intNbCar = 100){
+			// Version substr
+			/*$strContent = $this->getContent();
+			if (strlen($strContent) > $intNbCar){
+				$strContent = substr($strContent, 0, $intNbCar)."...";
+			}
+			return $strContent;*/
+			
+			// Version mb_strimwidth
+			return mb_strimwidth($this->getContent(), 0, $intNbCar+3, "...");
+
+		}
+		
 
 		/**
 		* Récupération de la date de création
