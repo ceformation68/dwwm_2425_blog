@@ -33,10 +33,14 @@
 	<div class="row mb-2">
 	<?php
 		foreach($arrArticles as $arrDetArticle){
-			$objArticle = new Article();
+			$objArticle = new Article(); // Article 'coquille vide' 
+			$objArticle->setId($arrDetArticle['article_id']);
 			$objArticle->setTitle($arrDetArticle['article_title']);
+			$objArticle->setImg($arrDetArticle['article_img']);
+			$objArticle->setContent($arrDetArticle['article_content']);
 			$objArticle->setCreatedate($arrDetArticle['article_createdate']);
-			var_dump($objArticle);
+			$objArticle->setCreator($arrDetArticle['user_name']);
+			//var_dump($objArticle);
 			include("article.php");
 		}
 	?>

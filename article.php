@@ -4,13 +4,13 @@
 			<h3 class="mb-0"><?php echo($objArticle->getTitle()); ?></h3>
 			<div class="mb-1 text-body-secondary">
 				<?php echo($objArticle->getCreateDateFormat()); ?> 
-				(<?php echo($arrDetArticle['user_name']); ?>)
+				(<?php echo($objArticle->getCreator()); ?>)
 			</div>
-			<p class="mb-auto"><?php echo($arrDetArticle['article_content']); ?></p>
+			<p class="mb-auto"><?php echo($objArticle->getContent()); ?></p>
 			<a href="#" class="icon-link gap-1 icon-link-hover stretched-link">Lire la suite</a>
 		</div>
 		<div class="col-auto d-none d-lg-block">
-			<img class="bd-placeholder-img" width="200" height="250" alt="<?php echo($arrDetArticle['article_title']); ?>" src="assets/images/<?php echo($arrDetArticle['article_img']); ?>">
+			<img class="bd-placeholder-img" width="200" height="250" alt="<?php echo($objArticle->getTitle()); ?>" src="assets/images/<?php echo($objArticle->getImg()); ?>">
 		</div>
 	</div>
 </article>

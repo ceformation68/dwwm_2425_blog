@@ -9,8 +9,12 @@
 	include_once("header.php");
 	/*require_once("connexion.php");*/
 	
-	// inclure le fichier modèle
+	// inclure les fichiers modèles
 	require("models/article_model.php");
+	require("models/user_model.php");
+	
+	require_once("entities/article_entity.php");
+	
 	// instancier
 	$objArticleModel	= new ArticleModel();
 
@@ -65,8 +69,6 @@
 	*/
 	
 	// Recherche de la liste des utilisateurs
-	// inclure le fichier modèle
-	require("models/user_model.php");
 	// instancier
 	$objUserModel	= new UserModel();
 	// Utiliser
@@ -115,6 +117,13 @@
 	
 	<?php
 		foreach($arrArticles as $arrDetArticle){
+			$objArticle = new Article(); // Article 'coquille vide' 
+			$objArticle->setId($arrDetArticle['article_id']);
+			$objArticle->setTitle($arrDetArticle['article_title']);
+			$objArticle->setImg($arrDetArticle['article_img']);
+			$objArticle->setContent($arrDetArticle['article_content']);
+			$objArticle->setCreatedate($arrDetArticle['article_createdate']);
+			$objArticle->setCreator($arrDetArticle['user_name']);
 			include("article.php");
 		}
 	?>
