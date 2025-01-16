@@ -9,6 +9,8 @@
 	
 	// inclure le fichier modèle
 	require("models/article_model.php");
+	require_once("entities/article_entity.php");
+
 	// instancier
 	$objArticleModel	= new ArticleModel();
 	
@@ -31,6 +33,10 @@
 	<div class="row mb-2">
 	<?php
 		foreach($arrArticles as $arrDetArticle){
+			$objArticle = new Article();
+			$objArticle->setTitle($arrDetArticle['article_title']);
+			$objArticle->setCreatedate($arrDetArticle['article_createdate']);
+			var_dump($objArticle);
 			include("article.php");
 		}
 	?>

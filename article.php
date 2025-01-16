@@ -1,9 +1,9 @@
 <article class="col-md-6">
 	<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 		<div class="col p-4 d-flex flex-column position-static">
-			<h3 class="mb-0"><?php echo($arrDetArticle['article_title']); ?></h3>
+			<h3 class="mb-0"><?php echo($objArticle->getTitle()); ?></h3>
 			<div class="mb-1 text-body-secondary">
-				<?php echo($arrDetArticle['article_createdate']); ?> 
+				<?php echo($objArticle->getCreateDateFormat()); ?> 
 				(<?php echo($arrDetArticle['user_name']); ?>)
 			</div>
 			<p class="mb-auto"><?php echo($arrDetArticle['article_content']); ?></p>
