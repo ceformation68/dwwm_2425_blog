@@ -6,6 +6,12 @@
 	// Variables fonctionnelles
 	$strPage	= "login";
 	include_once("header.php");
+
+	if (count($_SESSION) > 0 
+		&& isset($_SESSION['user']) 
+		&& $_SESSION['user']['user_id'] != "") {
+		header("Location:index.php");
+	}
 	
 	//var_dump($_POST);
 	// Récupération des valeurs du formulaire
@@ -32,6 +38,7 @@
 		// On cherche l'utilisateur si pas erreur
 		if (count($arrErrors) == 0){
 			require("models/user_model.php");
+			require("entities/user_entity.php");
 			$objUserModel 	= new UserModel();
 			$arrUser 		= $objUserModel->findUser($strMail, $strPassword);
 			if ($arrUser === false){
@@ -39,7 +46,9 @@
 			}else{
 				// Ajouter l'utilisateur en SESSION
 				//$_SESSION['user_id'] = $arrUser['user_id'];
-				$_SESSION['user'] = $arrUser;
+				/*$objUser	= new User;
+				$objUser->hydrate($arrUser);*/
+				$_SESSION['user'] = $arrUser;//$objUser;
 				header("Location:index.php");
 			}
 			//var_dump($arrUser);
@@ -59,7 +68,7 @@
 	<form method="post">
 		<p>
 			<label for="mail" class="form-label">Mail</label>
-			<input type="password" class="form-control" id="mail" name="mail" value="<?php echo($strMail); ?>" >
+			<input type="text" class="form-control" id="mail" name="mail" value="<?php echo($strMail); ?>" >
 		</p>
 		<p>
 			<label for="password" class="form-label">Mot de passe</label>

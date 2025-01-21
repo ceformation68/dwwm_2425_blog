@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	var_dump($_SESSION);
+	//var_dump($_SESSION);
 	//session_destroy();
 ?>
 <!doctype html>
@@ -39,6 +39,20 @@
 						<a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Mon blog</a>
 					</div>
 					<div id="user" class="col-4 d-flex justify-content-end align-items-center">
+						<!-- Si connecté -->
+						<?php if (count($_SESSION) > 0 
+								&& isset($_SESSION['user']) 
+								&& $_SESSION['user']['user_id'] != "") { ?>
+						<a class="btn btn-sm" href="edit_account.php" title="Modifier mon compte">
+							<i class="fas fa-user"></i> 
+							<?php echo($_SESSION['user']['user_firstname']); ?> 
+						</a>
+						| 
+						<a class="btn btn-sm" href="logout.php" title="Se déconnecter">
+							<i class="fas fa-sign-out-alt"></i>
+						</a> 
+						<?php }else{ ?>
+						<!-- Si non connecté -->
 						<a class="btn btn-sm" href="create_account.php" title="Créer un compte">
 							<i class="fas fa-user"></i>
 						</a>
@@ -46,6 +60,7 @@
 						<a class="btn btn-sm" href="login.php" title="Se connecter">
 							<i class="fas fa-sign-in-alt"></i>
 						</a> 
+						<?php } ?>
 					</div>
 				</div>
 			</header>
