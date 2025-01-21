@@ -36,6 +36,30 @@
 								FROM users
 								WHERE user_id IN (SELECT article_creator FROM articles)";
 			return $this->_db->query($strUserQuery)->fetchAll();
-		}		
+		}	
+
+		public function findUser(string $strMail, string $strPassword):array|bool{
+			$strUserQuery	= "SELECT user_id, user_name, user_firstname, user_pwd
+								FROM users
+								WHERE user_mail = '".$strMail."'";
+								//	AND user_pwd = '".$strPassword."'
+			$arrUser 		= $this->_db->query($strUserQuery)->fetch();
+
+			// Vérifier le mot de passe à part => Eviter SQL Injection
+			if (($arrUser !== false) && ($strPassword === $arrUser['user_pwd'])){
+				unset($arrUser['user_pwd']);
+				return $arrUser;
+			}
+			return false;
+			/*if ($arrUser === false){
+				return false;
+			}else{
+				if ($strPassword === $arrUser['user_pwd']){
+					return $arrUser;
+				}else{
+					return false;
+				}
+			}*/
+		}
 	}
 			
