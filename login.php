@@ -7,7 +7,7 @@
 	$strPage	= "login";
 	include_once("header.php");
 	
-	var_dump($_POST);
+	//var_dump($_POST);
 	// Récupération des valeurs du formulaire
 	$strMail		= $_POST['mail']??"";
 	$strPassword	= $_POST['password']??"";
@@ -57,11 +57,17 @@
 	<?php } ?>
 					
 	<form method="post">
-		<label>Mail</label>
-		<input type="text" name="mail" value="<?php echo($strMail); ?>" >
-		<label>Mot de passe</label>
-		<input type="password" name="password" >
-		<input type="submit" >
+		<p>
+			<label for="mail" class="form-label">Mail</label>
+			<input type="password" class="form-control" id="mail" name="mail" value="<?php echo($strMail); ?>" >
+		</p>
+		<p>
+			<label for="password" class="form-label">Mot de passe</label>
+			<input type="password" class="form-control" id="password" name="password" >
+		</p>
+		<p>
+			<input type="submit" >
+		</p>
 	</form>
 
 <?php
