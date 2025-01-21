@@ -39,7 +39,7 @@
 						<a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Mon blog</a>
 					</div>
 					<div id="user" class="col-4 d-flex justify-content-end align-items-center">
-						<a class="btn btn-sm" href="create_account.php" title="Se connecter">
+						<a class="btn btn-sm" href="create_account.php" title="Créer un compte">
 							<i class="fas fa-user"></i>
 						</a>
 						| 
