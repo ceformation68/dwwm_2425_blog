@@ -1,6 +1,7 @@
 <?php
+	require_once('entities/user_entity.php');
 	session_start();
-	//var_dump($_SESSION);
+	var_dump($_SESSION);
 	//session_destroy();
 ?>
 <!doctype html>
@@ -42,10 +43,10 @@
 						<!-- Si connecté -->
 						<?php if (count($_SESSION) > 0 
 								&& isset($_SESSION['user']) 
-								&& $_SESSION['user']['user_id'] != "") { ?>
+								&& $_SESSION['user']->getId() != "") { ?>
 						<a class="btn btn-sm" href="edit_account.php" title="Modifier mon compte">
 							<i class="fas fa-user"></i> 
-							<?php echo($_SESSION['user']['user_firstname']); ?> 
+							<?php echo($_SESSION['user']->getCreatorName()); ?> 
 						</a>
 						| 
 						<a class="btn btn-sm" href="logout.php" title="Se déconnecter">

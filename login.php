@@ -38,7 +38,7 @@
 		// On cherche l'utilisateur si pas erreur
 		if (count($arrErrors) == 0){
 			require("models/user_model.php");
-			require("entities/user_entity.php");
+			//require_once("entities/user_entity.php");
 			$objUserModel 	= new UserModel();
 			$arrUser 		= $objUserModel->findUser($strMail, $strPassword);
 			if ($arrUser === false){
@@ -46,9 +46,9 @@
 			}else{
 				// Ajouter l'utilisateur en SESSION
 				//$_SESSION['user_id'] = $arrUser['user_id'];
-				/*$objUser	= new User;
-				$objUser->hydrate($arrUser);*/
-				$_SESSION['user'] = $arrUser;//$objUser;
+				$objUser	= new User;
+				$objUser->hydrate($arrUser);
+				$_SESSION['user'] = $objUser;
 				header("Location:index.php");
 			}
 			//var_dump($arrUser);
