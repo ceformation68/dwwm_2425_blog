@@ -9,10 +9,10 @@
 
 	if (count($_SESSION) > 0 
 		&& isset($_SESSION['user']) 
-		&& $_SESSION['user']['user_id'] != "") {
+		&& $_SESSION['user']->getId() != "") {
 		header("Location:index.php");
 	}
-	
+
 	//var_dump($_POST);
 	// Récupération des valeurs du formulaire
 	$strMail		= $_POST['mail']??"";

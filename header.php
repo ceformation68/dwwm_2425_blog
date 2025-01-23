@@ -1,7 +1,8 @@
 <?php
+	/* Christel!!!!!!55 */
 	require_once('entities/user_entity.php');
 	session_start();
-	var_dump($_SESSION);
+	//var_dump($_SESSION);
 	//session_destroy();
 ?>
 <!doctype html>
