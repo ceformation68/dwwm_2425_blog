@@ -15,7 +15,7 @@
 		/**
 		* Constructeur de la Classe
 		*/
-		public function __construct():void{
+		public function __construct(){
 			parent::__construct();
 			$this->_prefixe = 'article';
 		}		

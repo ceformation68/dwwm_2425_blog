@@ -1,4 +1,6 @@
 <?php
+	var_dump(bin2hex(random_bytes(15)));
+
 	// Variables d'affichage
 	$strTitle	= "Accueil";
 	$strDesc	= "Page affichant les 4 derniers articles";

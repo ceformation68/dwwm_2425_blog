@@ -46,7 +46,9 @@
 			$arrUser 		= $this->_db->query($strUserQuery)->fetch();
 
 			// Vérifier le mot de passe à part => Eviter SQL Injection
-			if (($arrUser !== false) && ($strPassword === $arrUser['user_pwd'])){
+			if (($arrUser !== false) 
+				//&& ($strPassword === $arrUser['user_pwd'])){
+				&& (password_verify($strPassword, $arrUser['user_pwd']))){
 				unset($arrUser['user_pwd']);
 				return $arrUser;
 			}
@@ -95,7 +97,7 @@
 				$rqPrep		= $this->_db->prepare($strQuery);
 				$rqPrep->bindValue(":mail", $objUser->getMail(), PDO::PARAM_STR);
 				$rqPrep->bindValue(":name", $objUser->getName(), PDO::PARAM_STR);
-				$rqPrep->bindValue(":pwd", $objUser->getPwd(), PDO::PARAM_STR);
+				$rqPrep->bindValue(":pwd", $objUser->getPwdHash(), PDO::PARAM_STR);
 				$rqPrep->bindValue(":firstname", $objUser->getFirstname(), PDO::PARAM_STR);
 				$rqPrep->execute();
 			}catch(PDOException $e) { 

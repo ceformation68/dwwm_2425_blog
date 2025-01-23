@@ -83,5 +83,13 @@
 		*/
 		public function setPwd(string $strPwd){
 			$this->_pwd = $strPwd;
-		}				
+		}	
+		/**
+		* Récupération du mot de passe haché
+		* @return string mot de passe haché
+		*/
+		public function getPwdHash(){
+			return password_hash($this->getPwd(), PASSWORD_DEFAULT);
+		}
+		
 	}
