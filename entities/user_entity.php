@@ -9,6 +9,8 @@
 
 		private string $_name = "";
 		private string $_firstname = "";
+		private string $_mail = "";
+		private string $_pwd = "";
 		
 		public function __construct(){
 			parent::__construct();
@@ -19,7 +21,7 @@
 		* Récupération du nom
 		* @return string nom
 		*/
-		public function getName(){
+		public function getName():string{
 			return $this->_name;
 		}
 		/**
@@ -34,7 +36,7 @@
 		* Récupération du nom du créateur pour le select
 		* @return string Le nom 
 		*/
-		public function getCreatorName(){
+		public function getCreatorName():string{
 			return strtoupper($this->getName()).' '.$this->getFirstname();
 		}
 		
@@ -42,7 +44,7 @@
 		* Récupération du prénom
 		* @return string prénom
 		*/
-		public function getFirstname(){
+		public function getFirstname():string{
 			return $this->_firstname;
 		}
 		/**
@@ -52,6 +54,34 @@
 		public function setFirstname(string $strFirstname){
 			$this->_firstname = trim($strFirstname);
 		}		
+
+		/**
+		* Récupération du mail
+		* @return string mail
+		*/
+		public function getMail():string{
+			return $this->_mail;
+		}
+		/**
+		* Mise à jour du mail
+		* @param string mail 
+		*/
+		public function setMail(string $strMail){
+			$this->_mail = strtolower(trim($strMail));
+		}				
 		
-		
+		/**
+		* Récupération du mot de passe
+		* @return string mot de passe
+		*/
+		public function getPwd():string{
+			return $this->_pwd;
+		}
+		/**
+		* Mise à jour du mot de passe
+		* @param string mot de passe 
+		*/
+		public function setPwd(string $strPwd){
+			$this->_pwd = $strPwd;
+		}				
 	}

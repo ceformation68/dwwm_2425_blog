@@ -62,11 +62,46 @@
 			}*/
 		}
 		
-		public function insert(object $objUser){
-			$strQuery = "INSERT INTO ....";
-			
-			var_dump($objUser->getName());
-			
+		/**
+		* Fonction permettant de vérifier la présence d'une adresse mail en bdd
+		* @param string strMail Adresse mail à Vérifier
+		* @return bool Si trouvé ou non
+		*/
+		public function verifMail(string $strMail):bool{
+			$strUserQuery	= "SELECT user_mail
+								FROM users
+								WHERE user_mail = '".$strMail."'";
+			$arrUser 		= $this->_db->query($strUserQuery)->fetch();
+			return is_array($arrUser);
+		}
+		
+		/**
+		* Insertion en BDD d'un nouvel utilisateur
+		* @param object objUser
+		* @return bool L'insertion s'est bien passé ou pas
+		*/
+		public function insert(object $objUser):bool{
+			try {
+				/* Version en direct => A éviter insert */
+				/*$strQuery = "INSERT INTO users 
+								(user_name, user_firstname, user_mail, user_pwd)
+							VALUES ('".$objUser->getName()."', '".$objUser->getFirstname()."', 
+									'".$objUser->getMail()."', '".$objUser->getPwd()."');";*/
+				/* Version requête préparée */
+				$strQuery 	= "INSERT INTO users 
+										(user_name, user_firstname, user_mail, user_pwd)
+								VALUES  (:name, :firstname,	:mail, :pwd);";
+									
+				$rqPrep		= $this->_db->prepare($strQuery);
+				$rqPrep->bindValue(":mail", $objUser->getMail(), PDO::PARAM_STR);
+				$rqPrep->bindValue(":name", $objUser->getName(), PDO::PARAM_STR);
+				$rqPrep->bindValue(":pwd", $objUser->getPwd(), PDO::PARAM_STR);
+				$rqPrep->bindValue(":firstname", $objUser->getFirstname(), PDO::PARAM_STR);
+				$rqPrep->execute();
+			}catch(PDOException $e) { 
+				return false;
+			} 
+			return true;
 		}
 	}
 			

@@ -12,7 +12,10 @@
 		private string $_createdate;
 		private string $_creator;
 		
-		public function __construct(){
+		/**
+		* Constructeur de la Classe
+		*/
+		public function __construct():void{
 			parent::__construct();
 			$this->_prefixe = 'article';
 		}		
@@ -34,7 +37,7 @@
 		* Récupération du titre
 		* @return string titre
 		*/
-		public function getTitle(){
+		public function getTitle():string{
 			return strtoupper($this->_title);
 		}
 		/**
@@ -49,7 +52,7 @@
 		* Récupération de l'image
 		* @return string nom de l'image
 		*/
-		public function getImg(){
+		public function getImg():string{
 			return $this->_img;
 		}
 		/**
@@ -64,7 +67,7 @@
 		* Récupération du contenu
 		* @return string contenu
 		*/
-		public function getContent(){
+		public function getContent():string{
 			return $this->_content;
 		}
 		/**
@@ -75,7 +78,7 @@
 			$this->_content = $strContent;
 		}
 		
-		public function getContentResume(int $intNbCar = 100){
+		public function getContentResume(int $intNbCar = 100):string{
 			// Version substr
 			/*$strContent = $this->getContent();
 			if (strlen($strContent) > $intNbCar){
@@ -93,7 +96,7 @@
 		* Récupération de la date de création
 		* @return string date de création
 		*/
-		public function getCreatedate(){
+		public function getCreatedate():string{
 			return $this->_createdate;
 		}
 		/**
@@ -118,7 +121,7 @@
 		* Récupération du créateur
 		* @return string créateur
 		*/
-		public function getCreator(){
+		public function getCreator():string{
 			return $this->_creator;
 		}
 		/**
