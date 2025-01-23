@@ -1,5 +1,5 @@
 <?php
-	var_dump(bin2hex(random_bytes(15)));
+	//var_dump(bin2hex(random_bytes(15)));
 
 	// Variables d'affichage
 	$strTitle	= "Accueil";

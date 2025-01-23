@@ -7,7 +7,7 @@
 				(<?php echo($objArticle->getCreator()); ?>)
 			</div>
 			<p class="mb-auto"><?php echo($objArticle->getContentResume()); ?></p>
-			<a href="#" class="icon-link gap-1 icon-link-hover stretched-link">Lire la suite</a>
+			<a href="edit_article.php?id=<?php echo($objArticle->getId()); ?>" " class="icon-link gap-1 icon-link-hover stretched-link">Lire la suite</a>
 		</div>
 		<div class="col-auto d-none d-lg-block">
 			<img class="bd-placeholder-img" width="200" height="250" alt="<?php echo($objArticle->getTitle()); ?>" src="assets/images/<?php echo($objArticle->getImg()); ?>">

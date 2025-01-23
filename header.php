@@ -44,7 +44,9 @@
 						<?php if (count($_SESSION) > 0 
 								&& isset($_SESSION['user']) 
 								&& $_SESSION['user']->getId() != "") { ?>
-						<a class="btn btn-sm" href="edit_account.php" title="Modifier mon compte">
+						<a class="btn btn-sm" 
+							href="edit_account.php"
+							title="Modifier mon compte">
 							<i class="fas fa-user"></i> 
 							<?php echo($_SESSION['user']->getCreatorName()); ?> 
 						</a>
