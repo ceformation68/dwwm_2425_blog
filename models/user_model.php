@@ -61,5 +61,12 @@
 				}
 			}*/
 		}
+		
+		public function insert(object $objUser){
+			$strQuery = "INSERT INTO ....";
+			
+			var_dump($objUser->getName());
+			
+		}
 	}
 			

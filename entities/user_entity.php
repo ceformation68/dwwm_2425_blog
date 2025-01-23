@@ -7,8 +7,8 @@
 	
 	class User extends MotherEntity{
 
-		private string $_name;
-		private string $_firstname;
+		private string $_name = "";
+		private string $_firstname = "";
 		
 		public function __construct(){
 			parent::__construct();
@@ -27,7 +27,7 @@
 		* @param string nom 
 		*/
 		public function setName(string $strName){
-			$this->_name = $strName;
+			$this->_name = trim($strName);
 		}		
 		
 		/** 
@@ -50,7 +50,7 @@
 		* @param string prénom 
 		*/
 		public function setFirstname(string $strFirstname){
-			$this->_firstname = $strFirstname;
+			$this->_firstname = trim($strFirstname);
 		}		
 		
 		
