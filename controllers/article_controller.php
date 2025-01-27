@@ -80,4 +80,11 @@
 			
 			$this->display("blog");
 		}
+
+		public function edit_article(){
+			var_dump($_GET);
+			// Si id => sinon 403 ou 404
+			// Si article existe => sinon 404
+			// Afficher le formulaire pré-rempli
+		}
 	}

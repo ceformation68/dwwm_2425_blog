@@ -85,6 +85,9 @@
 			header("Location:index.php?ctrl=user&action=login");
 		}
 		
+		/**
+		* Page de création de compte 
+		*/
 		public function create_account(){
 			// Variables d'affichage
 			$this->_arrData['strTitle']	= "Créer un compte";
@@ -148,5 +151,29 @@
 			$this->_arrData['arrErrors']	= $arrErrors;
 			$this->_arrData['objUser']		= $objUser;
 			$this->display("create_account");
+		}
+
+		/**
+		* Page de modification de son compte 
+		*/
+		public function edit_account(){
+			// Variables d'affichage
+			$this->_arrData['strTitle']	= "Modifier un compte";
+			$this->_arrData['strDesc']	= "Page permettant de modifier un compte";
+			
+			// Variables fonctionnelles
+			$this->_arrData['strPage']	= "edit_account";
+
+			if (isset($_GET['id']) && ($_GET['id'] != $_SESSION['user']->getId())){
+				header("Location:index.php?ctrl=error&action=show_403");
+			}	
+
+			var_dump($_SESSION);
+			
+			// Rechercher l'utilisateur courant			
+		}
+		
+		public function del_account(){
+			
 		}
 	}

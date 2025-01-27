@@ -1,14 +1,3 @@
-<?php
-	// Variables d'affichage
-	$strTitle	= "Contact";
-	$strDesc	= "Page de contact";
-
-	// Variables fonctionnelles
-	$strPage	= "contact";
-
-	include_once("header.php");
-?>
-
 	<div class="row g-5">
 		<div class="col-md-4">
 			<div class="position-sticky" style="top: 2rem;">
@@ -79,6 +68,3 @@
 		</div>
 
 	</div>
-<?php
-	include_once("footer.php");
-?>
