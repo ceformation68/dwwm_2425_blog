@@ -1,7 +1,6 @@
 <?php
 	/* Christel!!!!!!55 */
-	require_once('entities/user_entity.php');
-	session_start();
+	//require_once('entities/user_entity.php');
 	//var_dump($_SESSION);
 	//session_destroy();
 ?>
@@ -46,22 +45,22 @@
 								&& isset($_SESSION['user']) 
 								&& $_SESSION['user']->getId() != "") { ?>
 						<a class="btn btn-sm" 
-							href="edit_account.php"
+							href="index.php?ctrl=user&action=edit_account"
 							title="Modifier mon compte">
 							<i class="fas fa-user"></i> 
 							<?php echo($_SESSION['user']->getCreatorName()); ?> 
 						</a>
 						| 
-						<a class="btn btn-sm" href="logout.php" title="Se déconnecter">
+						<a class="btn btn-sm" href="index.php?ctrl=user&action=logout" title="Se déconnecter">
 							<i class="fas fa-sign-out-alt"></i>
 						</a> 
 						<?php }else{ ?>
 						<!-- Si non connecté -->
-						<a class="btn btn-sm" href="create_account.php" title="Créer un compte">
+						<a class="btn btn-sm" href="index.php?ctrl=user&action=create_account" title="Créer un compte">
 							<i class="fas fa-user"></i>
 						</a>
 						| 
-						<a class="btn btn-sm" href="login.php" title="Se connecter">
+						<a class="btn btn-sm" href="index.php?ctrl=user&action=login" title="Se connecter">
 							<i class="fas fa-sign-in-alt"></i>
 						</a> 
 						<?php } ?>

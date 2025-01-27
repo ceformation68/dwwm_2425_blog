@@ -1,4 +1,7 @@
 <?php
+	require_once('entities/user_entity.php');
+	session_start();
+
 	//?ctrl=article&action=article_detail&id=5
 	//var_dump($_GET);
 	// Récupération des informations dans l'url

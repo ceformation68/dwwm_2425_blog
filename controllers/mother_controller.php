@@ -4,7 +4,7 @@
 		/*protected string $_strPage;
 		protected string $_strTitle;
 		protected string $_strDesc;*/
-		protected array $_arrData;
+		protected array $_arrData = array();
 		
 		public function __construct(){
 		}
