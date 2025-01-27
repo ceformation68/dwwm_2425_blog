@@ -70,7 +70,7 @@
 			</header>
 
 			<div class="nav-scroller py-1 mb-3 border-bottom">
-				<?php include_once("nav.php"); ?>
+				<?php include_once("views/_partial/nav.php"); ?>
 			</div>
 		</div>
 

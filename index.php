@@ -1,57 +1,24 @@
 <?php
-	//var_dump(bin2hex(random_bytes(15)));
-
-	// Variables d'affichage
-	$strTitle	= "Accueil";
-	$strDesc	= "Page affichant les 4 derniers articles";
-
-	// Variables fonctionnelles
-	$strPage	= "index";
-	include_once("header.php");
+	//?ctrl=article&action=article_detail&id=5
+	//var_dump($_GET);
+	// Récupération des informations dans l'url
+	$strController	= $_GET['ctrl']??"article";
+	//var_dump($strController);
+	$strAction		= $_GET['action']??"home";
+	//var_dump($strAction);
 	
-	// inclure le fichier modèle
-	require("models/article_model.php");
-	require_once("entities/article_entity.php");
-
-	// instancier
-	$objArticleModel	= new ArticleModel();
+	// Appeler le controller et la méthode 
+	require_once("controllers/mother_controller.php");
+	require_once("controllers/".$strController."_controller.php");
+	// Construction du nom du controller
+	$strCtrlName	= ucfirst($strController)."Ctrl";
+	//var_dump($strCtrlName);
+	// Instanciation du controller
+	$objController 	= new $strCtrlName();
+	// Appel de la méthode
+	$objController->$strAction();
 	
-	// Utiliser
-	$arrArticles		= $objArticleModel->findAll(4);
+	/***** ATTENTION *****
+		Prévoir les erreurs fichier, classe, méthode
+	*/
 	
-	/*require_once("connexion.php");
-
-	$strQuery		= "SELECT articles.*, CONCAT(user_name, \" \", user_firstname) 
-						AS \"user_name\"
-						FROM articles
-							INNER JOIN users ON article_creator = user_id
-						ORDER BY article_createdate DESC
-						LIMIT 4 OFFSET 0;";
-	$arrArticles	= $db->query($strQuery)->fetchAll();*/
-	
-	//var_dump($arrArticles);
-?>
-
-	<div class="row mb-2">
-	<?php
-		foreach($arrArticles as $arrDetArticle){
-			$objArticle = new Article(); // Article 'coquille vide' 
-			// hydrater l'objet
-			$objArticle->hydrate($arrDetArticle);
-			/*
-			$objArticle->setId($arrDetArticle['article_id']);
-			$objArticle->setTitle($arrDetArticle['article_title']);
-			$objArticle->setImg($arrDetArticle['article_img']);
-			$objArticle->setContent($arrDetArticle['article_content']);
-			$objArticle->setCreatedate($arrDetArticle['article_createdate']);
-			$objArticle->setCreator($arrDetArticle['user_name']);
-			*/
-			//var_dump($objArticle);
-			include("article.php");
-		}
-	?>
-	</div>
-<?php
-
-	include_once("footer.php");
-?>
