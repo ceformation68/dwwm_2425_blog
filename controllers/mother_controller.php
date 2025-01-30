@@ -1,4 +1,7 @@
 <?php
+	/**
+	* Classe mère des controllers
+	*/
 	class MotherCtrl{
 		
 		/*protected string $_strPage;
@@ -9,6 +12,9 @@
 		public function __construct(){
 		}
 		
+		/** 
+		* Fonction permettant l'affichage d'une page
+		*/
 		public function display(string $strView){
 			/*$strPage	= $this->_strPage;
 			$strTitle	= $this->_strTitle;
