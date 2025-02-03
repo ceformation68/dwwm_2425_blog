@@ -25,10 +25,7 @@
 		
 		{block name="js_head"}
 		{/block}
-		
-		{*if ($strPage == 'blog')}
-		<script src="assets/js/period.js"></script>
-		{/if*}
+
 	</head>
 	<body>
 		<div class="container">

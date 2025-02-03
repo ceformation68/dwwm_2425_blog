@@ -30,10 +30,20 @@
 			// Variables fonctionnelles
 			$this->_arrData['strPage']	= "index";			
 
-			// Utiliser
-			$arrArticles		= $this->_objArticleModel->findAll(4);
-			// Donner le tableau $arrArticles à la vue
-			$this->_arrData['arrArticles']	= $arrArticles;
+			// Tableau de tableau - liste des articles
+			$arrArticles			= $this->_objArticleModel->findAll(4);
+			//var_dump($arrArticles);
+			
+			$arrArticlesToDisplay 	= array();
+			foreach ($arrArticles as $arrDetArticle){
+				$objArticle = new Article(); // Article 'coquille vide' 
+				// hydrater l'objet
+				$objArticle->hydrate($arrDetArticle);
+				$arrArticlesToDisplay[] = $objArticle;
+			}
+			//var_dump($arrArticlesToDisplay);
+			// Donner le tableau $arrArticlesToDisplay à la vue
+			$this->_arrData['arrArticles']	= $arrArticlesToDisplay;
 			/* Equivalent à 
 			$this->_arrData['arrArticles']	= $objArticleModel->findAll(4);
 			*/
@@ -67,7 +77,14 @@
 
 			// Utiliser
 			$arrArticles		= $this->_objArticleModel->findAll();	
-			
+			// Transformer tableau en tableau d'objet dans une méthode
+			$arrArticlesToDisplay 	= array();
+			foreach ($arrArticles as $arrDetArticle){
+				$objArticle = new Article(); // Article 'coquille vide' 
+				// hydrater l'objet
+				$objArticle->hydrate($arrDetArticle);
+				$arrArticlesToDisplay[] = $objArticle;
+			}			
 			// Recherche de la liste des utilisateurs
 			// instancier
 			$objUserModel	= new UserModel();
@@ -75,7 +92,7 @@
 			$arrUsers		= $objUserModel->findAllCreator();			
 			
 			$this->_arrData['objArticleModel']	= $this->_objArticleModel;
-			$this->_arrData['arrArticles']		= $arrArticles;
+			$this->_arrData['arrArticles']		= $arrArticlesToDisplay;
 			$this->_arrData['arrUsers']			= $arrUsers;
 			
 			$this->display("blog");
