@@ -45,7 +45,7 @@
 		* @param string titre 
 		*/
 		public function setTitle(string $strTitle){
-			$this->_title = $strTitle;
+			$this->_title = $this->_nettoyage($strTitle);
 		}
 		
 		/**
@@ -75,7 +75,10 @@
 		* @param string contenu 
 		*/
 		public function setContent(string $strContent){
-			$this->_content = $strContent;
+			if (strpos($strContent, "<script>") !== false) {
+				// ecrire dans un fichier de log ou bdd 
+			}
+			$this->_content = ($this->_nettoyage($strContent));
 		}
 		
 		public function getContentResume(int $intNbCar = 100):string{
@@ -86,8 +89,8 @@
 			}
 			return $strContent;*/
 			
-			// Version mb_strimwidth
-			return mb_strimwidth($this->getContent(), 0, $intNbCar+3, "...");
+			// Version mb_strimwidth => Fabrice !!
+			return (mb_strimwidth($this->getContent(), 0, $intNbCar+3, "..."));
 
 		}
 		

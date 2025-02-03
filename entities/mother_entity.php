@@ -30,6 +30,16 @@
 		}	
 		
 		/**
+		* Méthode de nettoyage du texte saisi par les utilisateurs
+		* @param string $strText Texte à nettoyer
+		* @return string texte nettoyé
+		*/
+		protected function _nettoyage(string $strText):string{
+			$strText = str_replace("<script>", "", str_replace("</script>", "", $strText));
+			return $strText;
+		}
+		
+		/**
 		* Récupération de l'id
 		* @return int l'identifiant
 		*/
