@@ -86,5 +86,19 @@
 			// Si id => sinon 403 ou 404
 			// Si article existe => sinon 404
 			// Afficher le formulaire pré-rempli
+			$arrArticle = $this->_objArticleModel->get($_GET['id']);
+
+			$objArticle = new Article();
+			$objArticle->hydrate($arrArticle);
+			
+			// Variables d'affichage
+			$this->_arrData['strTitle']	= "Modifier un article";
+			$this->_arrData['strDesc']	= "Page permettant de modifier un article";
+
+			// Variables fonctionnelles
+			$this->_arrData['strPage']		= "edit_article";	
+			$this->_arrData['objArticle']	= $objArticle;	
+			
+			$this->display("edit_article");
 		}
 	}

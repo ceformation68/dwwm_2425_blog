@@ -77,8 +77,16 @@
 			return $arrArticles;
 		}
 		
+		/**
+		* Récupération d'un article en fonction de son identifiant
+		* @param int intArticleId Identifiant de l'article
+		* @return array Tableau des informations de l'article 
+		*/
 		public function get(int $intArticleId):array{
-			
+			$strQuery	= "SELECT article_title, article_img, article_content
+							FROM articles
+							WHERE article_id = ".$intArticleId;
+			return $this->_db->query($strQuery)->fetch();			
 		}
 		
 		
