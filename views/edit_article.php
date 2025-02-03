@@ -1,7 +1,3 @@
-<?php
-	var_dump($objArticle);
-?>
-
 <form action="" method="post">
 	<p>
 		<label>Titre</label>

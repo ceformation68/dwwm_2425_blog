@@ -82,14 +82,28 @@
 		}
 
 		public function edit_article(){
-			var_dump($_GET);
 			// Si id => sinon 403 ou 404
 			// Si article existe => sinon 404
+			// si on n'est PAS le créateur => 403
 			// Afficher le formulaire pré-rempli
 			$arrArticle = $this->_objArticleModel->get($_GET['id']);
 
 			$objArticle = new Article();
 			$objArticle->hydrate($arrArticle);
+			//$objArticle->setId($_GET['id']);
+			
+			// Si le formulaire est envoyé
+			if(count($_POST) > 0){
+				$objArticle->hydrate($_POST);
+				/* Tests de vérification 
+					titre obligatoire
+					contenu obligatoire
+				*/
+				$boolOk = $this->_objArticleModel->update($objArticle);
+				/*
+				Informer l'utilisateur des erreurs ou si c'est ok 
+				*/
+			}	
 			
 			// Variables d'affichage
 			$this->_arrData['strTitle']	= "Modifier un article";

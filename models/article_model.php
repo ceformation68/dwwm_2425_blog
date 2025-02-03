@@ -83,11 +83,33 @@
 		* @return array Tableau des informations de l'article 
 		*/
 		public function get(int $intArticleId):array{
-			$strQuery	= "SELECT article_title, article_img, article_content
+			$strQuery	= "SELECT article_id, article_title, article_img, article_content
 							FROM articles
 							WHERE article_id = ".$intArticleId;
 			return $this->_db->query($strQuery)->fetch();			
 		}
 		
+		/**
+		* Mettre à jour un article
+		* @param object $objArticle Article à mettre à jour
+		* @return bool Est-ce que la requête s'est bien passée
+		*/
+		public function update(object $objArticle):bool{
+			try{
+				$strQuery	= "UPDATE articles
+								SET article_title = :title,
+									article_content = :content
+								WHERE article_id = :id";
+				$rqPrepare	= $this->_db->prepare($strQuery);
+				$rqPrepare->bindValue(':title', $objArticle->getTitle(), PDO::PARAM_STR);
+				$rqPrepare->bindValue(':content', $objArticle->getContent(), PDO::PARAM_STR);
+				$rqPrepare->bindValue(':id', $objArticle->getId(), PDO::PARAM_INT);
+					
+				$rqPrepare->execute();
+			}catch (PDOException $e){
+				return false;
+			}
+			return true;
+		}
 		
 	}
