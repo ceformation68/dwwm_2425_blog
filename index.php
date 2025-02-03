@@ -1,4 +1,7 @@
 <?php
+	// Autoloader Composer
+	require('vendor/autoload.php');
+
 	require_once('entities/user_entity.php');
 	session_start();
 

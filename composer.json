@@ -1,0 +1,17 @@
+{
+    "name": "christel/blog_html",
+    "require": {
+        "smarty/smarty": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Christel\\BlogHtml\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Christel",
+            "email": "christel.ehrhart@ce-soft.info"
+        }
+    ]
+}
