@@ -3,6 +3,7 @@
 -> Terminer modifier un article (erreurs, ...)
 -> Traiter image dans modifier article (sécurité)
 -> Envoi de mails
+-> Réécriture URL (sécurité)
 
 -> Créer lien "Lire la suite"
 -> Créer page article_detail.php et afficher l'article en fonction de l'id
