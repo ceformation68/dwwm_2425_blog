@@ -1,12 +1,16 @@
 <?php
 	/**
-	* Classe d'un article
+	* Classe d'un article:
+	* <ul>
+	* 	<li>Attributs de l'article</li>
+	*	<li>Getters et setters </li>
+	* </ul>
 	* @author Christel Ehrhart
 	*/
 	require_once("mother_entity.php");
 	
 	class Article extends MotherEntity{
-		private string $_title;
+		private string $_title; /**< Titre de l'article */
 		private string $_img;
 		private string $_content;
 		private string $_createdate;

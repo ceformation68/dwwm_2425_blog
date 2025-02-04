@@ -10,9 +10,9 @@
 
 	class ArticleModel extends MotherModel{
 
-		// Attributs pour la recherche
-		public string 	$strKeywords 	= "";
-		public string 	$strDate 		= "";
+		/// Attributs pour la recherche
+		public string 	$strKeywords 	= ""; /**< Mots clés pour la recherche par défaut vide */
+		public string 	$strDate 		= ""; /**< Date unique pour la recherche par défaut vide */
 		public string 	$strStartDate 	= "";
 		public string 	$strEndDate 	= "";
 		public int 		$intPeriod 		= 0;
@@ -27,7 +27,7 @@
 
 		/**
 		* Récupération de tous les articles
-		* @param int intNbLimit Nombre de résultats à afficher - si tous = 0
+		* @param int $intNbLimit Nombre de résultats à afficher - si tous = 0
 		* @return array Tableau des articles de la bdd
 		*/
 		public function findAll(int $intNbLimit=0):array{

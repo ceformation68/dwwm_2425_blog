@@ -66,7 +66,7 @@
 		
 		/**
 		* Fonction permettant de vérifier la présence d'une adresse mail en bdd
-		* @param string strMail Adresse mail à Vérifier
+		* @param string $strMail Adresse mail à Vérifier
 		* @return bool Si trouvé ou non
 		*/
 		public function verifMail(string $strMail):bool{
@@ -79,7 +79,7 @@
 		
 		/**
 		* Insertion en BDD d'un nouvel utilisateur
-		* @param object objUser
+		* @param object $objUser Utilisateur à ajouter
 		* @return bool L'insertion s'est bien passé ou pas
 		*/
 		public function insert(object $objUser):bool{

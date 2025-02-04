@@ -35,6 +35,7 @@
 		*/
 		public function display(string $strView){
 			$objSmarty	= new Smarty();
+			//$objSmarty->setEscapeHtml(true);
 			foreach ($this->_arrData as $key=>$value){
 				$objSmarty->assign($key, $value);
 			}

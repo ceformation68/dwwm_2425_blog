@@ -2,9 +2,9 @@
 	/**
 	*
 	*/
+
 	class MotherEntity{
-		
-		protected string $_prefixe;
+		protected string $_prefixe; /** préfixe à utiliser pour la fonction d'hydratation */
 		private int $_id;
 		
 		public function __construct(){

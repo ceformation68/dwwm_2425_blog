@@ -1,7 +1,7 @@
 <?php
 	class MotherModel{
 		
-		protected object $_db;
+		protected object $_db; /**< Variable de connexion */
 		
 		public function __construct(){
 			try{
