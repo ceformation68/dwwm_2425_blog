@@ -115,11 +115,60 @@
 			// Si le formulaire est envoyé
 			if(count($_POST) > 0){
 				$objArticle->hydrate($_POST);
-				/* Tests de vérification 
-					titre obligatoire
-					contenu obligatoire
-				*/
-				$this->_arrErrors['test'] = "Je suis pas content";
+				// Tests de vérification 
+				if ($objArticle->getTitle() == ""){
+					$this->_arrErrors['title'] = "Le titre est obligatoire";
+				}
+				if ($objArticle->getContent() == ""){
+					$this->_arrErrors['content'] = "Le contenu est obligatoire";
+				}
+				// Image si l'utilisateur veut la changer
+				$arrImage	= $_FILES['image']; // on utilise une variable pour éviter de rappeler le name de l'input
+				if ($arrImage['name'] != ""){
+					if ($arrImage['error'] == 4){
+						$this->_arrErrors['image'] = "Le fichier est obligatoire";
+					}else{
+						if ($arrImage['error'] != 0){
+							$this->_arrErrors['image'] = "Le fichier a rencontré un pb";
+						}elseif ($arrImage['type'] != 'image/jpeg'){
+							$this->_arrErrors['image'] = "Uniquement les images jpeg sont acceptés";
+						//}elseif ($arrImage['size'] > 100000){
+							//$this->_arrErrors['image'] = "Le fichier ne doit pas dépasser 100Ko";
+						}
+					}
+
+					//if (count($arrErrors) == 0){
+					if (!isset($this->_arrErrors['image'])){
+						// fichier temporaire = source
+						$strSource		= $arrImage['tmp_name'];
+						// destination du fichier
+						$arrFileExplode	= explode(".", $arrImage['name']);
+						$strFileExt		= $arrFileExplode[count($arrFileExplode)-1];
+						$strFileName 	= bin2hex(random_bytes(10)).".webp";//.$strFileExt;
+						$strDest		= "assets/images/".$strFileName;
+
+						// Dimensions de mon image
+						list($intWidth, $intHeight) = getimagesize($strSource);
+						// Redimensionner
+						$objDest		= imagecreatetruecolor(500, 500); // vide;
+						$objSource		= imagecreatefromjpeg($strSource);
+						
+						var_dump(imagecopyresized($objDest, $objSource, 0, 0, 0, 0, 500, 500, $intWidth, $intHeight));
+						
+						var_dump(imagewebp($objDest, $strDest));
+						
+						$objArticle->setImg($strFileName);
+						
+						// On déplace le fichier
+						/*if (!move_uploaded_file($strSource, $strDest)){
+							$arrErrors['image'] = "Le fichier ne s'est pas correctement téléchargé";
+						}else{
+							// si le fichier est bien enregistré on ajoute le nom du fichier dans l'objet
+							$objArticle->setImg($strFileName);
+						}*/
+					}
+				}					
+				
 				$boolOk = $this->_objArticleModel->update($objArticle);
 				/*
 				Informer l'utilisateur des erreurs ou si c'est ok 

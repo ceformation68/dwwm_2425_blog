@@ -98,11 +98,13 @@
 			try{
 				$strQuery	= "UPDATE articles
 								SET article_title = :title,
-									article_content = :content
+									article_content = :content,
+									article_img = :image
 								WHERE article_id = :id";
 				$rqPrepare	= $this->_db->prepare($strQuery);
 				$rqPrepare->bindValue(':title', $objArticle->getTitle(), PDO::PARAM_STR);
 				$rqPrepare->bindValue(':content', $objArticle->getContent(), PDO::PARAM_STR);
+				$rqPrepare->bindValue(':image', $objArticle->getImg(), PDO::PARAM_STR);
 				$rqPrepare->bindValue(':id', $objArticle->getId(), PDO::PARAM_INT);
 					
 				$rqPrepare->execute();

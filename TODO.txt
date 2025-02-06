@@ -1,10 +1,4 @@
--> Optimiser affichage des erreurs (un seul endroit)
--> Terminer modifier un article :
-	- traiter les erreurs
-	- ajouter l'input pour l'image + enregistrer BDD et serveur
 
-
--> Traiter image dans modifier article (sécurité)
 -> Envoi de mails
 
 -> Créer lien "Lire la suite"
