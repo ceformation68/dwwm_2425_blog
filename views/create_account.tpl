@@ -5,15 +5,7 @@
 {/block}
 
 {block name="contenu"}
-	{*
-	<?php if (count($arrErrors) > 0){ ?>
-		<div class="alert alert-danger">
-		<?php foreach($arrErrors as $strError){ ?>
-			<p><?php echo $strError; ?></p>
-		<?php } ?>
-		</div>
-	<?php } ?>
-	*}
+
 	<!-- formulaire -->
 	<form method="post">
 	<p>

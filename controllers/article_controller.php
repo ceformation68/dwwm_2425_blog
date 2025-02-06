@@ -119,6 +119,7 @@
 					titre obligatoire
 					contenu obligatoire
 				*/
+				$this->_arrErrors['test'] = "Je suis pas content";
 				$boolOk = $this->_objArticleModel->update($objArticle);
 				/*
 				Informer l'utilisateur des erreurs ou si c'est ok 

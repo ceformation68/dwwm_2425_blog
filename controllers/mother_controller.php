@@ -9,7 +9,9 @@
 		/*protected string $_strPage;
 		protected string $_strTitle;
 		protected string $_strDesc;*/
-		protected array $_arrData = array();
+		protected array $_arrData 		= array();
+		protected array $_arrErrors 	= array();
+		protected string $_strSuccess 	= "";
 		
 		public function __construct(){
 		}
@@ -39,6 +41,10 @@
 			foreach ($this->_arrData as $key=>$value){
 				$objSmarty->assign($key, $value);
 			}
+			// Donner le tableau des erreurs (construit dans les controllers) au template
+			$objSmarty->assign("arrErrors", $this->_arrErrors);
+			$objSmarty->assign("strSuccess", $this->_strSuccess);
+			
 			$objSmarty->display("views/".$strView.".tpl");
 			
 			/*foreach ($this->_arrData as $key=>$value){
