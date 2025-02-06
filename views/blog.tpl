@@ -41,14 +41,11 @@
 					<label for="author">Auteur</label>
 					<select id="author" name="creator"  class="form-control">
 						<option value="0" {(($objArticleModel->intCreator == 0)?"selected":"")} > -- </option>
-						{foreach from=$arrUsers item=arrDetUser}
-							{*// Instancier objet User
-							$objUser = new User();
-							$objUser->hydrate($arrDetUser);
-						<option value="{$objUser->getId())}" 
-								{($objArticleModel->intCreator == $objUser->getId())?"selected":""} >
+						{foreach from=$arrUsers item=objUser}
+						<option value="{$objUser->getId()}" 
+							{($objArticleModel->intCreator == $objUser->getId())?"selected":""} >
 							{$objUser->getCreatorName()}
-						</option>*}
+						</option>
 						{/foreach}
 					</select>
 				</p>

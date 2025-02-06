@@ -86,14 +86,17 @@
 				$arrArticlesToDisplay[] = $objArticle;
 			}			
 			// Recherche de la liste des utilisateurs
-			// instancier
-			$objUserModel	= new UserModel();
-			// Utiliser
-			$arrUsers		= $objUserModel->findAllCreator();			
-			
+			$objUserModel		= new UserModel();
+			$arrUsers			= $objUserModel->findAllCreator();			
+			$arrUserToDisplay	= array();
+			foreach ($arrUsers as $arrDetUser){
+				$objUser = new User();
+				$objUser->hydrate($arrDetUser);
+				$arrUserToDisplay[] = $objUser;
+			}					
 			$this->_arrData['objArticleModel']	= $this->_objArticleModel;
 			$this->_arrData['arrArticles']		= $arrArticlesToDisplay;
-			$this->_arrData['arrUsers']			= $arrUsers;
+			$this->_arrData['arrUsers']			= $arrUserToDisplay;
 			
 			$this->display("blog");
 		}
