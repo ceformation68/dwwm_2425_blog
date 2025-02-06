@@ -1,8 +1,10 @@
 
 -> Envoi de mails
+-> Les messages (error / success) en session
 
 -> Créer lien "Lire la suite"
 -> Créer page article_detail.php et afficher l'article en fonction de l'id
+
 
 -> Réécriture URL
 -> CSRF
