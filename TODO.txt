@@ -1,10 +1,14 @@
 
 -> Envoi de mails
 -> Les messages (error / success) en session
+-> Traitement des fichiers
+
+-> Sécurisation du dispatcher
+
+-> Réécriture URL
+-> API
+-> Token / Mot de passe oublié / CSRF
+
 
 -> Créer lien "Lire la suite"
 -> Créer page article_detail.php et afficher l'article en fonction de l'id
-
-
--> Réécriture URL
--> CSRF
