@@ -1,3 +1,4 @@
+-> Smarty (nl2br / cache)
 
 -> Envoi de mails
 -> Les messages (error / success) en session
