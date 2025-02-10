@@ -2,3 +2,7 @@
 
 /vendor/
 /templates_c/
+/docs/
+/cache/
+/_old/
+/views/_old/
