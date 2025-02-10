@@ -9,14 +9,14 @@
 		<div class="col-md-4">
 			<div class="position-sticky" style="top: 2rem;">
 				<div id="map">
-					<iframe width="100%" height="500px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d85245.75141192738!2d7.322364206894916!3d48.11159122156081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479165dff670c1cf%3A0xe35d7e3e616ce966!2s68000+Colmar!5e0!3m2!1sfr!2sfr!4v1539164589375" allowfullscreen></iframe>			
+					<iframe title="carte GoogleMap" width="100%" height="500px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d85245.75141192738!2d7.322364206894916!3d48.11159122156081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479165dff670c1cf%3A0xe35d7e3e616ce966!2s68000+Colmar!5e0!3m2!1sfr!2sfr!4v1539164589375" allowfullscreen></iframe>			
 				</div>
 			</div>
 		</div>
 		<div class="col-md-8">
-			<h3 class="pb-4 mb-4 fst-italic border-bottom">
+			<h2 class="pb-4 mb-4 fst-italic border-bottom">
 				Contactez nous
-			</h3>
+			</h2>
 
 			<form name="contactForm" action="#" method="post" novalidate onSubmit="verifForm();return false;">
 				<div class="row g-3">
@@ -38,11 +38,11 @@
 					</div>
 					<div class="col-sm-6">
 					  <label for="name" class="form-label">Nom*</label>
-					  <input type="text" class="form-control" id="name" >
+					  <input type="text" class="form-control" name="name" id="name" >
 					</div>
 					<div class="col-sm-6">
 					  <label for="firstname" class="form-label">Prénom*</label>
-					  <input type="text" class="form-control" id="firstname" >
+					  <input type="text" class="form-control" name="firstname" id="firstname" >
 					</div>
 					<div class="col-12">
 					  <label for="email" class="form-label">Adresse mail*</label>

@@ -35,17 +35,24 @@
 		/** 
 		* Fonction permettant l'affichage d'une page avec Smarty
 		*/
-		public function display(string $strView){
+		public function display(string $strView, bool $boolAffiche = true){
 			$objSmarty	= new Smarty();
+			// Activer le cache => Attention penser au {nocache}
+			$objSmarty->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 			//$objSmarty->setEscapeHtml(true);
 			foreach ($this->_arrData as $key=>$value){
 				$objSmarty->assign($key, $value);
 			}
-			// Donner le tableau des erreurs (construit dans les controllers) au template
-			$objSmarty->assign("arrErrors", $this->_arrErrors);
-			$objSmarty->assign("strSuccess", $this->_strSuccess);
-			
-			$objSmarty->display("views/".$strView.".tpl");
+
+			if ($boolAffiche){
+				// Donner le tableau des erreurs (construit dans les controllers) au template
+				$objSmarty->assign("arrErrors", $this->_arrErrors);
+				$objSmarty->assign("strSuccess", $_SESSION['success']??$this->_strSuccess);
+				unset($_SESSION['success']);
+				$objSmarty->display("views/".$strView.".tpl");
+			}else{
+				return $objSmarty->fetch("views/".$strView.".tpl");
+			}
 			
 			/*foreach ($this->_arrData as $key=>$value){
 				$$key	= $value;

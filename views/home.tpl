@@ -4,7 +4,7 @@
  - {$strTitle}
 {/block}
 
-{block name="contenu"}
+{block name="contenu" nocache}
 	<div class="row mb-2">
 		{foreach from=$arrArticles item=objArticle}
 			{include file="views/_partial/article.tpl"}

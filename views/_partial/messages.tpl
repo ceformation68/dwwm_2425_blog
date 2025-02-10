@@ -1,3 +1,4 @@
+{nocache}
 	{if (count($arrErrors) > 0)}
 		<div class="alert alert-danger">
 		{foreach $arrErrors as $strError}
@@ -10,3 +11,4 @@
 			<p>{$strSuccess}</p>
 		</div>
 	{/if}	
+{/nocache}

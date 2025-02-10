@@ -1,7 +1,8 @@
 {
     "name": "christel/blog_html",
     "require": {
-        "smarty/smarty": "^5.4"
+        "smarty/smarty": "^5.4",
+		"phpmailer/phpmailer": "^6.9.2"
     },
     "autoload": {
         "psr-4": {
