@@ -1,17 +1,17 @@
-10/02/2025
--> Envoi de mails
--> Smarty (nl2br / cache / fetch)
--> Les messages (error / success) en session => Trouver la solution de unset de success
--> Sécurisation du dispatcher
-
 11/02/2025
+-> Sécurisation du dispatcher
 -> Traitement des fichiers
--> Réécriture URL
--> API
--> Token / Mot de passe oublié / CSRF
 
 13/02/2025
+-> API 
+
+24/02/2025
+-> Réécriture URL
+-> Token / Mot de passe oublié / CSRF
+
+25/02/2025
 -> Triggers et Procédures
 
+A voir si nécessaire
 -> Créer lien "Lire la suite"
 -> Créer page article_detail.php et afficher l'article en fonction de l'id

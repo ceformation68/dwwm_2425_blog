@@ -5,7 +5,7 @@
 		* Constructeur
 		*/
 		public function __construct(){
-			parent::__construct;
+			parent::__construct();
 		}		
 		
 		/**
@@ -34,4 +34,5 @@
 
 			$this->display("error_403");
 		}
+	}
 ?>

@@ -38,7 +38,7 @@
 		public function display(string $strView, bool $boolAffiche = true){
 			$objSmarty	= new Smarty();
 			// Activer le cache => Attention penser au {nocache}
-			$objSmarty->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
+			//$objSmarty->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 			//$objSmarty->setEscapeHtml(true);
 			foreach ($this->_arrData as $key=>$value){
 				$objSmarty->assign($key, $value);
