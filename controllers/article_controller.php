@@ -153,10 +153,11 @@
 						$objDest		= imagecreatetruecolor(500, 500); // vide;
 						$objSource		= imagecreatefromjpeg($strSource);
 						
-						var_dump(imagecopyresized($objDest, $objSource, 0, 0, 0, 0, 500, 500, $intWidth, $intHeight));
+						imagecopyresized($objDest, $objSource, 0, 0, 0, 0, 500, 500, $intWidth, $intHeight);
 						
-						var_dump(imagewebp($objDest, $strDest));
+						imagewebp($objDest, $strDest);
 						
+						$strOldImg	= $objArticle->getImg(); // Récupération de l'image avant changement
 						$objArticle->setImg($strFileName);
 						
 						// On déplace le fichier
@@ -170,6 +171,10 @@
 				}					
 				
 				$boolOk = $this->_objArticleModel->update($objArticle);
+				if ($boolOk){
+					// Supprime l'ancienne image
+					unlink("assets/images/".$strOldImg);
+				}
 				/*
 				Informer l'utilisateur des erreurs ou si c'est ok 
 				*/
