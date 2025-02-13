@@ -43,6 +43,7 @@
 			foreach ($this->_arrData as $key=>$value){
 				$objSmarty->assign($key, $value);
 			}
+			$objSmarty->assign("base_url", "http://localhost/blog_html");
 
 			if ($boolAffiche){
 				// Donner le tableau des erreurs (construit dans les controllers) au template

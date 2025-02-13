@@ -42,7 +42,7 @@
 		* @return string titre
 		*/
 		public function getTitle():string{
-			return strtoupper($this->_title);
+			return mb_strtoupper($this->_title);
 		}
 		/**
 		* Mise à jour du titre

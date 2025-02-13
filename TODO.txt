@@ -3,10 +3,10 @@
 -> Traitement des fichiers
 
 13/02/2025
+-> Réécriture URL
 -> API 
 
 24/02/2025
--> Réécriture URL
 -> Token / Mot de passe oublié / CSRF
 
 25/02/2025

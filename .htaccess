@@ -1,0 +1,24 @@
+# Empêcher la liste des fichiers
+Options -Indexes
+
+# Réécriture d'URL
+RewriteEngine On
+RewriteBase /blog_html/
+Options -MultiViews
+
+# Règle pour l'API avec paramètres - si fichier api.php
+#RewriteRule ^api/([^/]*)$ api.php?action=$1 [L,NC]
+#RewriteRule ^api/([^/]*)/([^/]*)$ api.php?action=$1&id=$2 [L,NC]
+
+# Règle pour l'API avec paramètres - en MVC
+RewriteRule ^api/([^/]*)$ index.php?ctrl=api&action=index&endpoint=$1 [L,NC,QSA]
+RewriteRule ^api/([^/]*)/([^/]*)$ index.php?ctrl=api&action=index&endpoint=$1&id=$2 [L,NC,QSA]
+
+# Règle pour les pages normales (seulement si ce n'est pas une URL d'API)
+# si pas répertoire
+RewriteCond %{REQUEST_FILENAME} !-d 
+# si pas fichier
+RewriteCond %{REQUEST_FILENAME} !-f 
+
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^(.+)/(.+)$ index.php?ctrl=$1&action=$2 [L,QSA]

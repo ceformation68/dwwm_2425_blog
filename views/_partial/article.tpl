@@ -10,7 +10,7 @@
 			<a href="index.php?ctrl=article&action=edit_article&id={$objArticle->getId()}" " class="icon-link gap-1 icon-link-hover stretched-link">Lire la suite</a>
 		</div>
 		<div class="col-auto d-none d-lg-block">
-			<img class="bd-placeholder-img" width="200" height="250" alt="{$objArticle->getTitle()}" src="assets/images/{$objArticle->getImg()}">
+			<img class="bd-placeholder-img" width="200" height="250" alt="{$objArticle->getTitle()}" src="{$base_url}/assets/images/{$objArticle->getImg()}">
 		</div>
 	</div>
 </article>

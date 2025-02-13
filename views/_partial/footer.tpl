@@ -9,10 +9,10 @@
 				<a href="#">Back to top</a>
 			</p>
 		</footer>
-		<?php if ($strPage == 'blog'){ ?>
+		{if ($strPage == 'blog')}
 		<script>
 			changePeriod();
 		</script>
-		<?php } ?>
+		{/if}
     </body>
 </html>

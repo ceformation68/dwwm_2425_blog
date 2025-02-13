@@ -12,15 +12,15 @@
 		{block name="stylesheet"}
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 		
-		<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{$base_url}/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">    
 	
 		<!-- Custom styles for this template -->
 		<link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
 		<!-- Custom styles for this template -->
-		<link href="assets/css/blog.css" rel="stylesheet">
-		<link href="assets/css/custom.css" rel="stylesheet">
+		<link href="{$base_url}/assets/css/blog.css" rel="stylesheet">
+		<link href="{$base_url}/assets/css/custom.css" rel="stylesheet">
 		{/block}
 		
 		{block name="js_head"}
