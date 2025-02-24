@@ -24,7 +24,7 @@
 				//var_dump($strMethod);
 				// On appel le setter uniquement s'il existe
 				if(method_exists($this, $strMethod)){
-					$this->$strMethod($value);
+					$this->$strMethod($this->_nettoyage($value));
 				}
 			}
 		}	

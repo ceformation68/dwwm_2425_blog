@@ -8,6 +8,7 @@
 
 24/02/2025
 -> Token / Mot de passe oublié / CSRF
+-> Cookies
 
 25/02/2025
 -> Triggers et Procédures

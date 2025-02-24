@@ -8,6 +8,7 @@
 
 	<!-- formulaire -->
 	<form method="post">
+		<input type="hidden" name="csrf_token" value="{$token??''}" >
 	<p>
 		<label>Nom d'utilisateur</label>
 		<input type="text" name="name" value="{$objUser->getName()}" >

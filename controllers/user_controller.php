@@ -12,6 +12,7 @@
 			require_once("entities/user_entity.php");
 			// instancier
 			$this->_objUserModel	= new UserModel();
+			parent::__construct();
 		}		
 		
 		/**
@@ -102,6 +103,12 @@
 			//var_dump($_POST);
 			//$this->_arrErrors	= array();
 			if (count($_POST) > 0){
+				// Vérification csrf
+				//var_dump($_SESSION['csrf_token']);
+				//var_dump($_POST['csrf_token']);
+				if(!$this->_verifyCsrfToken($_POST['csrf_token'])){
+					header("Location:index.php?ctrl=error&action=show_403");
+				}
 				// Créer un objet User
 				//require_once("entities/user_entity.php");
 				$objUser->hydrate($_POST);
@@ -150,6 +157,9 @@
 			//var_dump($this->_arrErrors);
 			//$this->_arrData['arrErrors']	= $this->_arrErrors;
 			$this->_arrData['objUser']		= $objUser;
+			$token	= $this->_generateCsrfToken();
+
+			$this->_arrData['token']		= $token;
 			$this->display("create_account");
 		}
 
@@ -164,13 +174,43 @@
 			// Variables fonctionnelles
 			$this->_arrData['strPage']	= "edit_account";
 
+			// Uniquement si user connecté
 			if (isset($_GET['id']) && ($_GET['id'] != $_SESSION['user']->getId())){
 				header("Location:index.php?ctrl=error&action=show_403");
 			}	
 
 			var_dump($_SESSION);
 			
-			// Rechercher l'utilisateur courant			
+			// Rechercher l'utilisateur courant		
+			$arrUser = $this->_objUserModel->get();
+			// => Vérifier que l'utilisateur existe
+			
+			$objUser = new User;
+			$objUser->hydrate($arrUser);
+			
+			// Si le formulaire est envoyé
+			if (count($_POST) > 0){
+				$objUser->hydrate($_POST);
+				// => Mettre à jour l'utilisateur en BDD avec tests de vérification
+
+				if (count($this->_arrErrors) == 0){
+					// Rafraichir l'utilisateur en session
+					$_SESSION['user'] = $objUser; 
+					$strPseudo = trim($_POST['pseudo']);
+					
+					setcookie('pseudo', "", $this->_arrCookieOptions);
+					if ($strPseudo != ''){
+						setcookie('pseudo', $strPseudo, $this->_arrCookieOptions);
+					}
+					$_SESSION['success'] = "L'utilisateur a bien été modifié";
+					header("Location:index.php");
+					exit();
+				}
+			}
+			
+			$this->_arrData['objUser']	= $objUser;
+
+			$this->display("edit_account");			
 		}
 		
 		public function del_account(){

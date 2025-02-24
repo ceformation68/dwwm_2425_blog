@@ -105,5 +105,18 @@
 			} 
 			return true;
 		}
+
+		public function get($id = null){
+			// si pas d'id précisé je récupère l'utilisateur en session
+			if (is_null($id)){
+				$id = $_SESSION['user']->getId();
+			}
+			
+			$strUserQuery	= "SELECT user_id, user_name, user_firstname, user_mail
+								FROM users
+								WHERE user_id = ".$id.";";
+			$arrUser 		= $this->_db->query($strUserQuery)->fetch();
+			return $arrUser;
+		}
 	}
 			

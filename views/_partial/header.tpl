@@ -38,14 +38,18 @@
 					</div>
 					<div id="user" class="col-4 d-flex justify-content-end align-items-center">
 						<!-- Si connecté -->
-						{if (count($_SESSION) > 0 
-								&& isset($_SESSION['user']) 
-						&& $_SESSION['user']->getId() != "") }
+						{if (isset($smarty.session.user) 
+								&& count($smarty.session.user) > 0 
+								&& $smarty.session.user->getId() != "") }
 						<a class="btn btn-sm" 
 							href="index.php?ctrl=user&action=edit_account"
 							title="Modifier mon compte">
 							<i class="fas fa-user"></i> 
-							{$_SESSION['user']->getCreatorName()}
+							{if isset($smarty.cookies.pseudo)}
+								{$smarty.cookies.pseudo}
+							{else}
+								{$smarty.session.user->getCreatorName()}
+							{/if}
 						</a>
 						| 
 						<a class="btn btn-sm" href="index.php?ctrl=user&action=logout" title="Se déconnecter">
