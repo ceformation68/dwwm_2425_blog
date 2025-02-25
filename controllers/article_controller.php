@@ -173,7 +173,9 @@
 				$boolOk = $this->_objArticleModel->update($objArticle);
 				if ($boolOk){
 					// Supprime l'ancienne image
-					unlink("assets/images/".$strOldImg);
+                    if (isset($strOldImg)) {
+                        unlink("assets/images/" . $strOldImg);
+                    }
 				}
 				/*
 				Informer l'utilisateur des erreurs ou si c'est ok 
