@@ -1,4 +1,6 @@
-<?php 
+<?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 	class UserCtrl extends MotherCtrl{
 		
 		private object $_objUserModel;
@@ -216,4 +218,108 @@
 		public function del_account(){
 			
 		}
+
+        /**
+         * Page de mot de passe oublié
+         * @return void
+         */
+        public function forgot_pwd()
+        {
+            // Variables d'affichage
+            $this->_arrData['strTitle']	= "Mot de passe oublié";
+            $this->_arrData['strDesc']	= "Page permettant de demander l'envoi d'un mail de mot de passe oublié";
+
+            // Variables fonctionnelles
+            $this->_arrData['strPage']	= "forgot_pwd";
+
+            if (count($_POST)>0){
+                $strMail = trim($_POST['mail']);
+                if ($strMail != ""){
+                    $arrUser = $this->_objUserModel->findByMail($strMail);
+                    if ($arrUser){
+                        $objUser = new User;
+                        $objUser->hydrate($arrUser);
+                        $token 	= bin2hex(random_bytes(32)); // Génère un token aléatoire
+                        // Mise à jour de la base de données
+                        if ($this->_objUserModel->forgot_pwd($token, $objUser->getId())) {
+                            // Envoi de mail
+                            $objMail = new PHPMailer(); // Nouvel objet Mail
+                            $objMail->IsSMTP();
+                            $objMail->Mailer = "smtp";
+                            $objMail->CharSet = PHPMailer::CHARSET_UTF8;
+
+                            // Si on veut afficher les messages de debug
+                            $objMail->SMTPDebug = 0;
+
+                            // Connection au serveur de mail
+                            $objMail->SMTPAuth = TRUE;
+                            $objMail->SMTPSecure = "tls";
+                            $objMail->Port = 587;
+                            $objMail->Host = "smtp.gmail.com";
+                            $objMail->Username = 'christel.ceformation@gmail.com';
+                            $objMail->Password = 'cdbk mrjr aiqo tndi';
+
+                            // Comment envoyer le mail
+                            $objMail->IsHTML(true); // en HTML
+                            $objMail->setFrom('no-reply@blog.fr', 'Mon BLOG'); // Expéditeur
+                            // Destinataire(s)
+                            $objMail->addAddress($objUser->getMail(), $objUser->getCreatorName());
+
+                            $this->_arrData['objUser'] 	= $objUser;
+                            $this->_arrData['token'] 	= $token;
+                            // Contenu du mail
+                            $objMail->Subject 			= 'Demande de contact';
+                            $objMail->Body 				= $this->display("mails/forgot_pwd", false);
+                            //$mail->addAttachment('test.txt');
+
+                            if (!$objMail->send()) {
+                                $this->_arrErrors['mail'] = $objMail->ErrorInfo;
+                            }
+                        }
+                    }
+					$this->_strSuccess = "Si vous faites partie des utilisateurs du site, 
+					vous allez recevoir un mail contenant un lien pour réinitialiser le mot de passe.";
+                }else{
+                    $this->_arrErrors['mail'] = "L'adresse mail est obligatoire";
+                }
+            }
+
+            // View
+            $this->display("forgot_pwd");
+        }
+
+        /**
+         * Page de réinitialisation du mot de passe
+         * @return void
+         */
+        public function reset_pwd(){
+            // Variables d'affichage
+            $this->_arrData['strTitle']	= "Réinitialisation du Mot de passe";
+            $this->_arrData['strDesc']	= "Page permettant de réinitialiser son mot de passe";
+
+            // Variables fonctionnelles
+            $this->_arrData['strPage']	= "reset_pwd";
+
+            $arrUser = $this->_objUserModel->findByToken($_GET['token']??"");
+
+            if ($arrUser){
+                if (count($_POST) > 0) {
+                    if ($_POST['pwd'] == $_POST['confirm_pwd']) {
+                        $objUser = new User;
+                        $objUser->hydrate($arrUser);
+                        $objUser->setPwd($_POST['pwd']);
+                        if ($this->_objUserModel->updatePwd($objUser)) {
+                            $_SESSION['success'] = "Le mot de passe a bien été changé, vous pouvez vous connecter";
+                            header("Location:index.php?ctrl=user&action=login");
+                            exit;
+                        }
+                    }
+                }
+            }else{
+                $this->_arrErrors['expire'] = "Demande de réinitalisation expirée";
+            }
+
+            // View
+            $this->display("reset_pwd");
+        }
 	}

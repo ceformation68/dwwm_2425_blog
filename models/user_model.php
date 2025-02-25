@@ -106,7 +106,12 @@
 			return true;
 		}
 
-		public function get($id = null){
+        /**
+         * Récupération d'un utilisateur avec son id
+         * @param $id si précisé,sinon celui en session
+         * @return array|bool Tableau de l'utilisateur ou false si non trouvé
+         */
+		public function get($id = null):array|bool{
 			// si pas d'id précisé je récupère l'utilisateur en session
 			if (is_null($id)){
 				$id = $_SESSION['user']->getId();
@@ -118,5 +123,67 @@
 			$arrUser 		= $this->_db->query($strUserQuery)->fetch();
 			return $arrUser;
 		}
-	}
+
+        /**
+         * Récupération d'un utilisateur en fonction de son mail
+         * @param string $strMail
+         * @return array|bool Tableau de l'utilisateur ou false si non trouvé
+         */
+        public function findByMail(string $strMail):array|bool{
+            $strUserQuery	= "SELECT user_id, user_name, user_firstname, user_mail
+								FROM users
+								WHERE user_mail = '".$strMail."'";
+            $arrUser 		= $this->_db->query($strUserQuery)->fetch();
+
+            return $arrUser;
+        }
+
+        /**
+         * Récupération d'un utilisateur en fonction du token
+         * @param string $strToken token à rechercher
+         * @return array|bool Tableau de l'utilisateur ou false si non trouvé
+         */
+        public function findByToken(string $strToken):array|bool{
+            $strUserQuery	= "SELECT user_id, user_name, user_firstname, user_mail
+								FROM users
+								WHERE user_reset_token = '".$strToken."'
+								    AND user_reset_exp_date > NOW()";
+            $arrUser 		= $this->_db->query($strUserQuery)->fetch();
+
+            return $arrUser;
+        }
+
+        /**
+         * Mise à jour des informations de mot de passe oublié de l'utilisateur
+         * @param string $token Token pour récupérer l'utilisateur
+         * @param int $user_id Identifiant de l'utilisateur concerné
+         * @return bool
+         */
+        public function forgot_pwd(string $token, int $user_id) :bool{
+            $strQuery 	= "UPDATE users
+                            SET  user_reset_token = :token, 
+                                 user_reset_date = NOW(),
+                                 user_reset_exp_date = DATE_ADD(NOW(), INTERVAL 15 MINUTE)
+                            WHERE user_id = :id ;";
+            $rqPrep     = $this->_db->prepare($strQuery);
+            $rqPrep->bindValue(":token", $token, PDO::PARAM_STR);
+            $rqPrep->bindValue(":id", $user_id, PDO::PARAM_INT);
+            return $rqPrep->execute();
+        }
+
+        /**
+         * Mise à jour du mot de passe de l'utilisateur
+         * @param object $objUser Utilisateur concerné
+         * @return bool
+         */
+        public function updatePwd(object $objUser):bool{
+            $strQuery 	= "UPDATE users
+                            SET  user_pwd = :pwd
+                            WHERE user_id = :id ;";
+            $rqPrep     = $this->_db->prepare($strQuery);
+            $rqPrep->bindValue(":pwd", $objUser->getPwdHash(), PDO::PARAM_STR);
+            $rqPrep->bindValue(":id", $objUser->getId(), PDO::PARAM_INT);
+            return $rqPrep->execute();
+        }
+    }
 			

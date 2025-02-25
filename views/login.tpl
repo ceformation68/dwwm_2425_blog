@@ -27,4 +27,5 @@
 			<input type="submit" >
 		</p>
 	</form>
+	<a href="index.php?ctrl=user&action=forgot_pwd">Mot de passe oublié</a>
 {/block}
